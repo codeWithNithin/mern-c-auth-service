@@ -1,3 +1,5 @@
+import { Config } from './config/env.js'
+
 console.log('Welcome to Auth service')
 
 function welcome(name: string, age: number) {
@@ -16,3 +18,5 @@ function test() {
 }
 
 test()
+
+console.log(Config.port)
