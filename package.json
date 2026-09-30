@@ -1,0 +1,20 @@
+{
+  "name": "mern-c-auth-service",
+  "version": "1.0.0",
+  "description": "Auth service for users",
+  "homepage": "https://github.com/codeWithNithin/mern-c-auth-service#readme",
+  "bugs": {
+    "url": "https://github.com/codeWithNithin/mern-c-auth-service/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codeWithNithin/mern-c-auth-service.git"
+  },
+  "license": "ISC",
+  "author": "Nithin Kumar",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
