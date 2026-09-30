@@ -1,22 +1,12 @@
+import app from './app.js'
 import { Config } from './config/env.js'
 
-console.log('Welcome to Auth service')
+function startServer(): void {
+    const PORT: number = Number(Config.port)
 
-function welcome(name: string, age: number) {
-    console.log(`Hello ${name}, you are ${age} years old`)
+    app.listen(PORT, () => {
+        console.log(`Server created at: ${PORT}`)
+    })
 }
 
-welcome('nithin', 20)
-
-function test() {
-    const obj = {
-        name: 'John',
-        age: 30,
-        city: 'New York',
-    }
-    console.log(obj.age)
-}
-
-test()
-
-console.log(Config.port)
+startServer()
