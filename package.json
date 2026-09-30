@@ -13,8 +13,8 @@
   "license": "ISC",
   "author": "Nithin Kumar",
   "type": "module",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node src/server.js"
   }
 }
