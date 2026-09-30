@@ -17,10 +17,13 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
-    "start": "node src/server.ts"
+    "start": "node src/server.ts",
+    "format:fix": "prettier . --write",
+    "format:check": "prettier . --check"
   },
   "devDependencies": {
     "@types/node": "^26.6.3",
+    "prettier": "3.9.9",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2"
   }
