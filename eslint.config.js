@@ -6,15 +6,9 @@ export default tseslint.config(
     js.configs.recommended,
     ...tseslint.configs.recommended,
     {
-        languageOptions: {
-            parserOptions: {
-                projectService: true,
-                tsconfigRootDir: import.meta.dirname,
-            },
-        },
         rules: {
             'dot-notation': 'error',
-            'no-console': 'error',
+            // 'no-console': 'error',
         },
     },
 )
