@@ -7,5 +7,5 @@ const { NODE_ENV, PORT } = process.env
 
 export const Config = {
     port: PORT || 3000,
-    env: NODE_ENV || 'dev',
+    NODE_ENV: NODE_ENV || 'dev',
 }

@@ -1,12 +1,17 @@
 import app from './app.js'
 import { Config } from './config/env.js'
+import logger from './config/logger.js'
 
 function startServer(): void {
-    const PORT: number = Number(Config.port)
+    try {
+        const PORT: number = Number(Config.port)
 
-    app.listen(PORT, () => {
-        console.log(`Server created at: ${PORT}`)
-    })
+        app.listen(PORT, () => {
+            logger.info('server running at PORT', { port: PORT })
+        })
+    } catch (err) {
+        logger.error('err from server', { err: err })
+    }
 }
 
 startServer()
