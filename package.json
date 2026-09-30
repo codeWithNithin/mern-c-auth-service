@@ -15,6 +15,13 @@
   "type": "module",
   "main": "src/server.js",
   "scripts": {
-    "dev": "node src/server.js"
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node src/server.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
   }
 }

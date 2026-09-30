@@ -1,1 +1,0 @@
-console.log('Welcome to Auth service')
