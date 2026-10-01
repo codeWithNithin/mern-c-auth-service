@@ -1,55 +1,60 @@
 {
-    "name": "mern-c-auth-service",
-    "version": "1.0.0",
-    "description": "Auth service for users",
-    "homepage": "https://github.com/codeWithNithin/mern-c-auth-service#readme",
-    "bugs": {
-        "url": "https://github.com/codeWithNithin/mern-c-auth-service/issues"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/codeWithNithin/mern-c-auth-service.git"
-    },
-    "license": "ISC",
-    "author": "Nithin Kumar",
-    "type": "module",
-    "main": "src/server.js",
-    "scripts": {
-        "dev": "tsx watch src/server.ts",
-        "build": "tsc",
-        "start": "node src/server.ts",
-        "lint": "eslint .",
-        "lint:fix": "eslint . --fix",
-        "format:fix": "prettier . --write",
-        "format:check": "prettier . --check",
-        "prepare": "husky",
-        "test": "node --import tsx --test --test-reporter=spec"
-    },
-    "devDependencies": {
-        "@eslint/js": "^10.0.1",
-        "@types/express": "^5.0.6",
-        "@types/http-errors": "^2.0.5",
-        "@types/node": "^26.6.3",
-        "@types/supertest": "^7.2.1",
-        "eslint": "^10.11.0",
-        "husky": "^9.1.7",
-        "lint-staged": "^17.6.0",
-        "prettier": "3.9.9",
-        "supertest": "^7.3.0",
-        "tsx": "^4.23.15",
-        "typescript": "~6.0.3",
-        "typescript-eslint": "^8.71.0"
-    },
-    "lint-staged": {
-        "*.ts": [
-            "npm run format:fix",
-            "npm run lint:fix"
-        ]
-    },
-    "dependencies": {
-        "dotenv": "^18.0.4",
-        "express": "^5.2.1",
-        "http-errors": "^2.0.1",
-        "winston": "^3.19.0"
-    }
+   "name": "mern-c-auth-service",
+   "version": "1.0.0",
+   "description": "Auth service for users",
+   "homepage": "https://github.com/codeWithNithin/mern-c-auth-service#readme",
+   "bugs": {
+      "url": "https://github.com/codeWithNithin/mern-c-auth-service/issues"
+   },
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/codeWithNithin/mern-c-auth-service.git"
+   },
+   "license": "ISC",
+   "author": "Nithin Kumar",
+   "type": "module",
+   "main": "src/server.js",
+   "scripts": {
+      "dev": "cross-env NODE_ENV=dev tsx watch src/server.ts",
+      "build": "tsc",
+      "start": "ts-node src/index.ts",
+      "lint": "eslint .",
+      "lint:fix": "eslint . --fix",
+      "format:fix": "prettier . --write",
+      "format:check": "prettier . --check",
+      "prepare": "husky",
+      "test": "node --import tsx --test --test-reporter=spec",
+      "typeorm": "typeorm-ts-node-commonjs"
+   },
+   "devDependencies": {
+      "@eslint/js": "^10.0.1",
+      "@types/express": "^5.0.6",
+      "@types/http-errors": "^2.0.5",
+      "@types/node": "^26.6.3",
+      "@types/supertest": "^7.2.1",
+      "cross-env": "^10.1.0",
+      "eslint": "^10.11.0",
+      "husky": "^9.1.7",
+      "lint-staged": "^17.6.0",
+      "prettier": "3.9.9",
+      "supertest": "^7.3.0",
+      "ts-node": "^10.9.2",
+      "tsx": "^4.23.15",
+      "typescript": "~6.0.3",
+      "typescript-eslint": "^8.71.0"
+   },
+   "lint-staged": {
+      "*.ts": [
+         "npm run format:fix",
+         "npm run lint:fix"
+      ]
+   },
+   "dependencies": {
+      "dotenv": "^18.0.4",
+      "express": "^5.2.1",
+      "http-errors": "^2.0.1",
+      "reflect-metadata": "^0.2.2",
+      "typeorm": "1.1.1",
+      "winston": "^3.19.0"
+   }
 }
