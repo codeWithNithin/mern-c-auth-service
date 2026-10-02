@@ -282,5 +282,24 @@ describe('POST /auth/register', () => {
             const users = await userRepository.find()
             assert.strictEqual(users[0].email, 'something@something.com')
         })
+
+        it('should trim the first name field', async () => {
+            // Arrange
+            const userData = {
+                firstName: ' Nithin  ',
+                lastName: 'V Kumar',
+                email: ' something@something.com ',
+                password: 'secret-password',
+                role: Roles.CUSTOMER,
+            }
+
+            // act
+            await request(app).post('/auth/register').send(userData)
+
+            // assert
+            const userRepository = connection.getRepository(User)
+            const users = await userRepository.find()
+            assert.strictEqual(users[0].firstName, 'Nithin')
+        })
     })
 })
