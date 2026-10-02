@@ -211,5 +211,29 @@ describe('POST /auth/register', () => {
 
             assert.strictEqual(users.length, 0)
         })
+
+        it('it should return status code 400 if lastName is missing', async () => {
+            // ARRANGE
+            const userData = {
+                firstName: 'Nithin',
+                lastName: '',
+                email: 'something@something.com',
+                password: 'secret-password',
+                role: Roles.CUSTOMER,
+            }
+            // ACT
+            const response = await request(app)
+                .post('/auth/register')
+                .send(userData)
+
+            // ASSERT
+            assert.strictEqual(response.statusCode, 400)
+
+            // Make sure that when bad request err is thrown, no user data should be created in database
+            const userRepository = connection.getRepository(User)
+            const users = await userRepository.find()
+
+            assert.strictEqual(users.length, 0)
+        })
     })
 })
