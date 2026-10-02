@@ -16,4 +16,7 @@ export class User {
 
     @Column({ select: false, type: 'varchar', length: 25 })
     password!: string
+
+    @Column({ type: 'varchar', length: 10 })
+    role!: string
 }

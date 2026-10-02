@@ -1,6 +1,7 @@
 import type { NextFunction, Request, Response } from 'express'
 import type UserService from '../services/user.service.js'
 import type { Logger } from 'winston'
+import { Roles } from '../constants/index.js'
 
 class AuthController {
     constructor(
@@ -24,6 +25,7 @@ class AuthController {
                 lastName,
                 email,
                 password,
+                role: Roles.CUSTOMER,
             })
 
             this.logger.info('user created successfully', { id: user.id })

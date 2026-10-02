@@ -5,6 +5,7 @@ import assert from 'node:assert'
 import { DataSource } from 'typeorm'
 import { AppDataSource } from '../../src/config/data-source'
 import { User } from '../../src/entities/User'
+import { Roles } from '../../src/constants'
 
 describe('POST /auth/register', () => {
     let connection: DataSource
@@ -52,7 +53,7 @@ describe('POST /auth/register', () => {
                 lastName: 'V Kumar',
                 email: 'something@something.com',
                 password: 'secret-password',
-                // role: Roles.CUSTOMER,
+                role: Roles.CUSTOMER,
             }
 
             // Act
@@ -76,7 +77,7 @@ describe('POST /auth/register', () => {
                 lastName: 'V Kumar',
                 email: 'something@something.com',
                 password: 'secret-password',
-                // role: Roles.CUSTOMER,
+                role: Roles.CUSTOMER,
             }
 
             // Act
@@ -88,6 +89,29 @@ describe('POST /auth/register', () => {
 
             // if teh data already present, then user data is stored...
             assert.strictEqual(users.length, 1)
+        })
+
+        it('should assign a customer role', async () => {
+            // Arrange
+            const userData = {
+                firstName: 'Nithin',
+                lastName: 'V Kumar',
+                email: 'something@something.com',
+                password: 'secret-password',
+                role: Roles.CUSTOMER,
+            }
+
+            // Act
+            await request(app).post('/auth/register').send(userData)
+
+            // Assert
+            const userRepository = connection.getRepository(User)
+            const users = await userRepository.find()
+
+            // check if role is in database
+            assert.ok('role' in users[0])
+            // check that role should contain customer value
+            assert.strictEqual(users[0].role, Roles.CUSTOMER)
         })
     })
 
