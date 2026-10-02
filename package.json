@@ -23,7 +23,7 @@
       "format:fix": "prettier . --write",
       "format:check": "prettier . --check",
       "prepare": "husky",
-      "test": "node --import tsx --test --test-reporter=spec",
+      "test": "cross-env NODE_ENV=test node --import tsx --test --test-reporter=spec",
       "typeorm": "typeorm-ts-node-commonjs"
    },
    "devDependencies": {
@@ -53,6 +53,7 @@
       "dotenv": "^18.0.4",
       "express": "^5.2.1",
       "http-errors": "^2.0.1",
+      "pg": "^8.23.1",
       "reflect-metadata": "^0.2.2",
       "typeorm": "1.1.1",
       "winston": "^3.19.0"
