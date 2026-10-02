@@ -138,6 +138,31 @@ describe('POST /auth/register', () => {
             assert.strictEqual(users[0].password.length, 60)
             assert.match(users[0].password, /^\$2[ab]\$\d+\$/)
         })
+
+        it('should return 400 if email is already present', async () => {
+            // Arrange
+            const userData = {
+                firstName: 'Nithin',
+                lastName: 'V Kumar',
+                email: 'something@something.com',
+                password: 'secret-password',
+                role: Roles.CUSTOMER,
+            }
+
+            // Act
+
+            const userRepository = connection.getRepository(User)
+            await userRepository.save({ ...userData })
+
+            const response = await request(app)
+                .post('/auth/register')
+                .send(userData)
+
+            const users = await userRepository.find()
+
+            assert.strictEqual(response.status, 400)
+            assert.strictEqual(users.length, 1)
+        })
     })
 
     describe('fields missing', () => {})
