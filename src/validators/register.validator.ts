@@ -20,4 +20,13 @@ export default checkSchema({
         notEmpty: true,
         trim: true,
     },
+    password: {
+        trim: true,
+        errorMessage: 'Password is missing !!!',
+        notEmpty: true,
+        isLength: {
+            options: { min: 8 },
+            errorMessage: 'Password should be at least 8 chars',
+        },
+    },
 })
