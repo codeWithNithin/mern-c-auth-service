@@ -262,4 +262,25 @@ describe('POST /auth/register', () => {
             assert.strictEqual(users.length, 0)
         })
     })
+
+    describe('all fields are not in format', () => {
+        it('should trim the email field', async () => {
+            // Arrange
+            const userData = {
+                firstName: 'Nithin',
+                lastName: 'V Kumar',
+                email: ' something@something.com ',
+                password: 'secret-password',
+                role: Roles.CUSTOMER,
+            }
+
+            // act
+            await request(app).post('/auth/register').send(userData)
+
+            // assert
+            const userRepository = connection.getRepository(User)
+            const users = await userRepository.find()
+            assert.strictEqual(users[0].email, 'something@something.com')
+        })
+    })
 })
