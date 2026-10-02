@@ -6,18 +6,22 @@ import { User } from '../entities/User.js'
 import logger from '../config/logger.js'
 import CredentialService from '../services/credential.service.js'
 import registerValidator from '../validators/register.validator.js'
+import TokenService from '../services/token.service.js'
+import { RefreshToken } from '../entities/RefreshToken.js'
 
 const authRouter = express.Router()
 
 // repositories
 const userRepository = AppDataSource.getRepository(User)
+const tokenRepository = AppDataSource.getRepository(RefreshToken)
 
 // services
 const credentialService = new CredentialService()
 const userService = new UserService(userRepository, credentialService)
+const tokenService = new TokenService(tokenRepository)
 
 // controllers
-const authController = new AuthController(userService, logger)
+const authController = new AuthController(userService, logger, tokenService)
 
 authRouter.post(
     '/register',

@@ -17,7 +17,6 @@
    "scripts": {
       "dev": "cross-env NODE_ENV=dev tsx watch src/server.ts",
       "build": "tsc",
-      "start": "ts-node src/index.ts",
       "lint": "eslint .",
       "lint:fix": "eslint . --fix",
       "format:fix": "prettier . --write",
@@ -28,9 +27,11 @@
    },
    "devDependencies": {
       "@eslint/js": "^10.0.1",
+      "@types/cookie-parser": "^1.4.10",
       "@types/express": "^5.0.6",
       "@types/express-validator": "^2.20.33",
       "@types/http-errors": "^2.0.5",
+      "@types/jsonwebtoken": "^9.0.10",
       "@types/node": "^26.6.3",
       "@types/supertest": "^7.2.1",
       "cross-env": "^10.1.0",
@@ -52,10 +53,12 @@
    },
    "dependencies": {
       "bcryptjs": "^3.0.3",
+      "cookie-parser": "^1.4.7",
       "dotenv": "^18.0.4",
       "express": "^5.2.1",
       "express-validator": "^7.3.2",
       "http-errors": "^2.0.1",
+      "jsonwebtoken": "^9.0.3",
       "pg": "^8.23.1",
       "reflect-metadata": "^0.2.2",
       "typeorm": "1.1.1",
