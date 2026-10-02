@@ -5,6 +5,7 @@ import { AppDataSource } from '../config/data-source.js'
 import { User } from '../entities/User.js'
 import logger from '../config/logger.js'
 import CredentialService from '../services/credential.service.js'
+import registerValidator from '../validators/register.validator.js'
 
 const authRouter = express.Router()
 
@@ -18,6 +19,10 @@ const userService = new UserService(userRepository, credentialService)
 // controllers
 const authController = new AuthController(userService, logger)
 
-authRouter.post('/register', authController.register.bind(authController))
+authRouter.post(
+    '/register',
+    registerValidator,
+    authController.register.bind(authController),
+)
 
 export default authRouter
