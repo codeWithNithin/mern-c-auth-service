@@ -31,6 +31,7 @@ class AuthController {
             this.logger.info('user created successfully', { id: user.id })
             res.status(201).json({ message: 'user register successful' })
         } catch (err) {
+            console.log(err)
             next(err)
             return
         }

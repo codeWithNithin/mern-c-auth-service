@@ -113,6 +113,31 @@ describe('POST /auth/register', () => {
             // check that role should contain customer value
             assert.strictEqual(users[0].role, Roles.CUSTOMER)
         })
+
+        it('should store hashed password in database', async () => {
+            // Arrange
+            const userData = {
+                firstName: 'Nithin',
+                lastName: 'V Kumar',
+                email: 'something@something.com',
+                password: 'secret-password',
+                role: Roles.CUSTOMER,
+            }
+
+            // Act
+            await request(app).post('/auth/register').send(userData)
+
+            // assert
+            const userRepository = connection.getRepository(User)
+            const users = await userRepository.find({
+                select: { password: true },
+            })
+
+            // check if the user entered password is not same as password stored in DB
+            assert.notStrictEqual(users[0].password, userData.password)
+            assert.strictEqual(users[0].password.length, 60)
+            assert.match(users[0].password, /^\$2[ab]\$\d+\$/)
+        })
     })
 
     describe('fields missing', () => {})
