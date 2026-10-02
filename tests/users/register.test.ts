@@ -320,5 +320,28 @@ describe('POST /auth/register', () => {
             const users = await userRepository.find()
             assert.strictEqual(users[0].lastName, 'V Kumar')
         })
+
+        it('should return 400 status code if password length is less than 8 charecters', async () => {
+            // Arrange
+            const userData = {
+                firstName: 'Nithin',
+                lastName: 'V Kumar',
+                email: 'something@something.com',
+                password: 'secret',
+                role: Roles.CUSTOMER,
+            }
+
+            // act
+            const response = await request(app)
+                .post('/auth/register')
+                .send(userData)
+            assert.strictEqual(response.status, 400)
+
+            // Assert
+            const userRepository = connection.getRepository(User)
+            const users = await userRepository.find()
+
+            assert.strictEqual(users.length, 0)
+        })
     })
 })
