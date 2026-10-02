@@ -7,6 +7,7 @@ import { AppDataSource } from '../../src/config/data-source.js'
 import { User } from '../../src/entities/User.js'
 import { Roles } from '../../src/constants'
 import { isJwtValid } from '../utils/index.js'
+import { RefreshToken } from '../../src/entities/RefreshToken.js'
 
 describe('POST /auth/register', () => {
     let connection: DataSource
@@ -163,6 +164,33 @@ describe('POST /auth/register', () => {
 
             assert.strictEqual(response.status, 400)
             assert.strictEqual(users.length, 1)
+        })
+
+        it('should persist refresh token in database', async () => {
+            // Arrange
+            const userData = {
+                firstName: 'Nithin',
+                lastName: 'V Kumar',
+                email: 'something@something.com',
+                password: 'secret-password',
+                role: Roles.CUSTOMER,
+            }
+
+            // Act
+            const response = await request(app)
+                .post('/auth/register')
+                .send(userData)
+
+            // assert
+            const refreshTokenRepo = connection.getRepository(RefreshToken)
+            const refreshTokens = await refreshTokenRepo
+                .createQueryBuilder('refreshToken')
+                .where('refreshToken.userId = :userId', {
+                    userId: (response.body as Record<string, string>).id,
+                })
+                .getMany()
+
+            assert.strictEqual(refreshTokens.length, 1)
         })
     })
 
