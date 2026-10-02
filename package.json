@@ -22,7 +22,7 @@
       "format:fix": "prettier . --write",
       "format:check": "prettier . --check",
       "prepare": "husky",
-      "test": "cross-env NODE_ENV=test node --import tsx --test --test-reporter=spec",
+      "test": "cross-env NODE_ENV=test node --import tsx --test --test-concurrency=1",
       "typeorm": "typeorm-ts-node-commonjs"
    },
    "devDependencies": {

@@ -37,6 +37,52 @@ class UserService {
             role,
         })
     }
+
+    async findEmail(email: string) {
+        try {
+            return await this.userRepository.findOne({
+                where: {
+                    email,
+                },
+                select: {
+                    id: true,
+                    firstName: true,
+                    lastName: true,
+                    password: true,
+                    role: true,
+                },
+            })
+        } catch {
+            const error = createHttpError(
+                500,
+                'failed to fetch email from database',
+            )
+            throw error
+        }
+    }
+
+    // async findById(id: number) {
+    //     return await this.userRepository.findOne({
+    //         where: {
+    //             id,
+    //         },
+    //         relations: {
+    //             tenant: true,
+    //         },
+    //     })
+    // }
+
+    // async find() {
+    //     return await this.userRepository.find()
+    // }
+
+    // async update(id: number, userData: limitedUser) {
+    //     return await this.userRepository.update(id, userData)
+    // }
+
+    // async delete(id: number) {
+    //     return await this.userRepository.delete(id)
+    // }
 }
 
 export default UserService
